@@ -4,15 +4,15 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-3">Register here, fill in all fields.</legend>
-            {{form.as_ul}}
+                <legend class="border-bottom mb-3">Login here, fill in all fields.</legend>
+            {{form.as_p}}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Submit</button>
+                <button class="btn btn-outline-info" type="submit">Sign in</button>
             </div>
         </form>
         <div class="border-top pt-3">
-            <small class="text-muted">Sign in</small>
+            <small class="text-muted">Not a user, Sign Up</small>
         </div>
     </div>
 {% endblock content %}
