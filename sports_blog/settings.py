@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'sports_blog_users_app.apps.SportsBlogUsersAppConfig',
     'sports_blog_app.apps.SportsBlogAppConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +123,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ('semantic-ui')
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
