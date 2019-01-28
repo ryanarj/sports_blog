@@ -3,12 +3,15 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView)
 from .models import Post
+import pdb
+
 
 def home(request):
     context = {
-        'posts' : Post.objects.all()
+        'posts': Post.objects.all()
     }
     return render(request, 'blog/home.html', context)
+
 
 def about(request):
     return HttpResponse('<h1>Blog About</h1>')
@@ -18,26 +21,44 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
-class PostListView(ListView):
-    def get_queryset(self):
-        # original qs
-        qs = super().get_queryset() 
-        # filter by a variable captured from url, for example
-        return qs.filter(name__startswith=self.kwargs['blog_type'])
-    def get_slug_field(self):
-        """
-        Get the name of a slug field to be used to look up by slug.
-        """
-        return self.slug_field
 
-    query_blog_name = get_queryset
-    model = Post
-    if query_blog_name == 'MLB':
-        template_name = 'blog/mlb_page.html'
-    else:
-        template_name = 'blog/home.html'
+class PostListMLBView(ListView):
+
+    def get_queryset(self):
+        return Post.objects.all().filter(blog_type='MLB')
+
+    model = get_queryset
     context_object_name = 'posts'
+    template_name = 'blog/mlb_page.html'
     ordering = ['-date_posted']
+
+class PostListNBAView(ListView):
+
+    def get_queryset(self):
+        return Post.objects.all().filter(blog_type='NBA')
+
+    model = get_queryset
+    context_object_name = 'posts'
+    template_name = 'blog/nba_page.html'
+    ordering = ['-date_posted']
+
+class PostListNFLView(ListView):
+
+    def get_queryset(self):
+        return Post.objects.all().filter(blog_type='NFL')
+
+    model = get_queryset
+    context_object_name = 'posts'
+    template_name = 'blog/nfl_page.html'
+    ordering = ['-date_posted']
+
+class PostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'blog/home.html'
+    x = 1
+    ordering = ['-date_posted']
+
 
 class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
@@ -54,6 +75,7 @@ class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return True
         return False
 
+
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
@@ -68,6 +90,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.author:
             return True
         return False
+
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
