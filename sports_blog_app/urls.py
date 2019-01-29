@@ -7,7 +7,10 @@ from .views import (PostListView,
                     PostDeleteView, 
                     PostListMLBView,
                     PostListNBAView,
-                    PostListNFLView)
+                    PostListNFLView,
+                    PostCommentView,
+                    PostCommentApproveView,
+                    PostCommentRemoveView)
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
@@ -17,6 +20,9 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete')
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('post/<int:pk>/comment/',PostCommentView, name='add_comment_to_post'),
+    path('comment/<int:pk>/approve/', PostCommentApproveView, name='comment_approve'),
+    path('comment/<int:pk>/remove/', PostCommentRemoveView, name='comment_remove')
 ]
        
