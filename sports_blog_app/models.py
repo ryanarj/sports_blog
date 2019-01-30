@@ -25,6 +25,9 @@ class Comment(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
+
     def approve(self):
         self.approved_comment = True
         self.save()
