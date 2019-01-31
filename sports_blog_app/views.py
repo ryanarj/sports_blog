@@ -115,7 +115,7 @@ def PostCommentView(request, pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post-detail', pk=post.id)
     else:
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
@@ -123,9 +123,9 @@ def PostCommentView(request, pk):
 def PostCommentApproveView(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect('post_detail', pk=comment.post.pk)
+    return redirect('post-detail', pk=comment.post.pk)
 
 def PostCommentRemoveView(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
-    return redirect('post_detail', pk=comment.post.pk)
+    return redirect('post-detail', pk=comment.post.pk)
