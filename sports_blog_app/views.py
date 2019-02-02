@@ -62,11 +62,10 @@ class PostListView(ListView):
     ordering = ['-date_posted']
 
 
-class PostCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
     template_name = 'blog/post_form.html'
-    slug_url_kwarg = 'blog_id'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
