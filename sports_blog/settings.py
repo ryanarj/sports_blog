@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'sports_blog_users_app.apps.SportsBlogUsersAppConfig',
     'sports_blog_app.apps.SportsBlogAppConfig',
+    'sports_blog_chat.apps.SportBlogChatConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
