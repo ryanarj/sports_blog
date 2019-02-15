@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'sports_blog_app.apps.SportsBlogAppConfig',
     'sports_blog_chat.apps.SportsBlogChatConfig',
     'crispy_forms',
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
